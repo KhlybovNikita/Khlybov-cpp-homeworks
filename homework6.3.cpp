@@ -1,17 +1,18 @@
 // Программа вариант 1 "Длина строки"
 #include <iostream>
 #include <string>
+using namespace std;
 
 int main() 
 {
-    std::string input;
+    string input;
     
     // Ввод строки от пользователя
-    std::cout << "Введите строку на английском языке: ";
-    std::getline(std::cin, input);
+    cout << "Введите строку на английском языке: ";
+    getline(cin, input);
     
     // Вывод длины строки
-    std::cout << "Длина строки: " << input.length() << std::endl;
+    cout << "Длина строки: " << input.length() << endl;
     
     return 0;
 }
