@@ -4,11 +4,13 @@
 using namespace std;
 
 // Функция, которая вычичляет сумму трёх чисел
-int sumOfThree(int a, int b, int c) {
+int sumOfThree(int a, int b, int c) 
+{
     return a + b + c;
 }
 
-int main() {
+int main() 
+{
     int a, b, c;
     
     cout << "Введите три числа: ";
