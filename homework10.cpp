@@ -1,53 +1,68 @@
+// Программа для нахождения индексов двух элементов, сумма которых равна target
 #include <iostream>
 #include <vector>
 #include <unordered_map>
+#include <sstream>
+#include <string>
 
 using namespace std;
 
 vector<int> twoSum(vector<int>& nums, int target) 
 {
-    unordered_map<int, int> num_map;
-    for (int i = 0; i < nums.size(); i++)
+    unordered_map<int, int> numMap;
+    
+    for (int i = 0; i < nums.size(); i++) 
     {
         int complement = target - nums[i];
-        if (num_map.find(complement) != num_map.end()) 
+        
+        if (numMap.find(complement) != numMap.end()) 
         {
-            vector<int> result;
-            result.push_back(num_map[complement]);
-            result.push_back(i);
-            return result;
+            return {numMap[complement], i};
         }
-        num_map[nums[i]] = i;
+        
+        numMap[nums[i]] = i;
     }
-    return vector<int>();
+    
+    return {};
 }
 
-int main() {
+int main() 
+{
     vector<int> nums;
-    int n, target;
+    string input;
+    int target;
+
+    // Вводим массив
+    cout << "Введите числа массива через пробел: ";
+    getline(cin, input);
     
-    cout << "Введите количество элементов которое будет содержать массив: ";
-    cin >> n;
-    
-    cout << "Введите все элементы массива: ";
-    for (int i = 0; i < n; i++)
+    stringstream ss(input);
+    int num;
+    while (ss >> num) 
     {
-        int num;
-        cin >> num;
         nums.push_back(num);
     }
-    
-    cout << "Введите сумму, целое число (target): ";
-    cin >> target;
-    
-    vector<int> result = twoSum(nums, target);
-    
-    if (result.size() == 2) {
-        cout << "Индексы: " << result[0] << ", " << result[1] << endl;
-        cout << "Числа: " << nums[result[0]] << " + " << nums[result[1]] << " = " << target << endl;
-    } else {
-        cout << "Решение не найдено!" << endl;
+
+    // Проверяем чтобы массив содержал не меньше двух элементов
+    if (nums.size() < 2) 
+    {
+        cout << "Массив должен содержать не меньше 2 элементов" << endl;
+        return 1;
     }
+
     
+    cout << "Введите число (target): ";
+    cin >> target;
+
+    // Нахаодим индексы
+    vector<int> result = twoSum(nums, target);
+
+    // Выводим результат
+    if (!result.empty()) {
+        cout << result[0] << ", " << result[1] << endl;
+    } else {
+        cout << "Ответ не найден" << endl;
+    }
+
     return 0;
 }
