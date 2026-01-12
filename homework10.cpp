@@ -1,68 +1,53 @@
-// Программа для нахождения индексов двух элементов, сумма которых равна target
 #include <iostream>
 #include <vector>
 #include <unordered_map>
-#include <sstream>
-#include <string>
 
 using namespace std;
 
 vector<int> twoSum(vector<int>& nums, int target) 
 {
-    unordered_map<int, int> numMap;
-    
-    for (int i = 0; i < nums.size(); i++) 
+    unordered_map<int, int> num_map;
+    for (int i = 0; i < nums.size(); i++)
     {
         int complement = target - nums[i];
-        
-        if (numMap.find(complement) != numMap.end()) 
+        if (num_map.find(complement) != num_map.end()) 
         {
-            return {numMap[complement], i};
+            vector<int> result;
+            result.push_back(num_map[complement]);
+            result.push_back(i);
+            return result;
         }
-        
-        numMap[nums[i]] = i;
+        num_map[nums[i]] = i;
     }
-    
-    return {};
+    return vector<int>();
 }
 
-int main() 
-{
+int main() {
     vector<int> nums;
-    string input;
-    int target;
-
-    // Вводим массив
-    cout << "Введите числа массива через пробел: ";
-    getline(cin, input);
+    int n, target;
     
-    stringstream ss(input);
-    int num;
-    while (ss >> num) 
+    cout << "Введите количество элементов которое будет содержать массив: ";
+    cin >> n;
+    
+    cout << "Введите все элементы массива: ";
+    for (int i = 0; i < n; i++)
     {
+        int num;
+        cin >> num;
         nums.push_back(num);
     }
-
-    // Проверяем чтобы массив содержал не меньше двух элементов
-    if (nums.size() < 2) 
-    {
-        cout << "Массив должен содержать не меньше 2 элементов" << endl;
-        return 1;
-    }
-
     
-    cout << "Введите число (target): ";
+    cout << "Введите сумму, целое число (target): ";
     cin >> target;
-
-    // Нахаодим индексы
+    
     vector<int> result = twoSum(nums, target);
-
-    // Выводим результат
-    if (!result.empty()) {
-        cout << result[0] << ", " << result[1] << endl;
+    
+    if (result.size() == 2) {
+        cout << "Индексы: " << result[0] << ", " << result[1] << endl;
+        cout << "Числа: " << nums[result[0]] << " + " << nums[result[1]] << " = " << target << endl;
     } else {
-        cout << "Ответ не найден" << endl;
+        cout << "Решение не найдено!" << endl;
     }
-
+    
     return 0;
 }
